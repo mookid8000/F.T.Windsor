@@ -12,14 +12,14 @@ namespace F.T.Windsor.Tests
     public class TestFilterHandlersFor
     {
         [Test]
-        public void CanResolveStuffWithHandlerSelector()
+        public void CanResolveStuffWithHandlerFilter()
         {
             var container = new WindsorContainer();
 
             container.AddFacility<FtwFacility>()
                 .Register(Component.For<IFilterHandlersFor<ISomeService>>().ImplementedBy<SomeServiceFilter>(),
-                          Component.For<ISomeService>().ImplementedBy<FirstImpl>(),
-                          Component.For<ISomeService>().ImplementedBy<SecondImpl>());
+                            Component.For<ISomeService>().ImplementedBy<FirstImpl>(),
+                            Component.For<ISomeService>().ImplementedBy<SecondImpl>());
 
             var services = container.ResolveAll<ISomeService>();
             Assert.That(services[0].GetType(), Is.EqualTo(typeof(SecondImpl)));

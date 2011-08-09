@@ -5,13 +5,13 @@ using Castle.MicroKernel;
 
 namespace F.T.Windsor
 {
-    public class FtwHandlerSelector : IHandlerSelector, IHandlersFilter
+    public class Ftw : IHandlerSelector, IHandlersFilter
     {
         readonly IKernel kernel;
         readonly ConcurrentBag<Type> selectorTypesToLookFor = new ConcurrentBag<Type>();
         readonly ConcurrentBag<Type> filterTypesToLookFor = new ConcurrentBag<Type>();
 
-        public FtwHandlerSelector(IKernel kernel)
+        public Ftw(IKernel kernel)
         {
             this.kernel = kernel;
         }

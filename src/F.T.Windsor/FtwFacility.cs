@@ -10,22 +10,22 @@ namespace F.T.Windsor
     {
         protected override void Init()
         {
-            var ftwHandlerSelector = new FtwHandlerSelector(Kernel);
+            var ftwHandlerSelector = new Ftw(Kernel);
             Kernel.AddHandlerSelector(ftwHandlerSelector);
             Kernel.AddHandlersFilter(ftwHandlerSelector);
             Kernel.ComponentRegistered += (key, handler) => ComponentRegistered(handler, ftwHandlerSelector);
         }
 
-        void ComponentRegistered(IHandler handler, FtwHandlerSelector ftwHandlerSelector)
+        void ComponentRegistered(IHandler handler, Ftw ftw)
         {
             var componentModel = handler.ComponentModel;
 
-            RegisterSelectors(ftwHandlerSelector, componentModel);
+            RegisterSelectors(ftw, componentModel);
 
-            RegisterFilters(ftwHandlerSelector, componentModel);
+            RegisterFilters(ftw, componentModel);
         }
 
-        void RegisterFilters(FtwHandlerSelector ftwHandlerSelector, ComponentModel componentModel)
+        void RegisterFilters(Ftw ftw, ComponentModel componentModel)
         {
             var filters = componentModel.Services
                 .Where(s => s.IsGenericType && s.GetGenericTypeDefinition() == typeof(IFilterHandlersFor<>))
@@ -37,11 +37,11 @@ namespace F.T.Windsor
 
             foreach (var filterType in filters)
             {
-                ftwHandlerSelector.RegisterFilter(filterType.GetGenericArguments()[0]);
+                ftw.RegisterFilter(filterType.GetGenericArguments()[0]);
             }
         }
 
-        void RegisterSelectors(FtwHandlerSelector ftwHandlerSelector, ComponentModel componentModel)
+        void RegisterSelectors(Ftw ftw, ComponentModel componentModel)
         {
             var selectors = componentModel.Services
                 .Where(s => s.IsGenericType && s.GetGenericTypeDefinition() == typeof (ISelectHandlerFor<>))
@@ -53,7 +53,7 @@ namespace F.T.Windsor
 
             foreach (var selectorType in selectors)
             {
-                ftwHandlerSelector.RegisterSelector(selectorType.GetGenericArguments()[0]);
+                ftw.RegisterSelector(selectorType.GetGenericArguments()[0]);
             }
         }
     }

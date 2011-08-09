@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FtwHandlerSelector.cs" />
+    <Compile Include="Ftw.cs" />
     <Compile Include="FtwFacility.cs" />
     <Compile Include="IFilterHandlersFor.cs" />
     <Compile Include="ISelectHandlerFor.cs" />

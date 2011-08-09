@@ -16,8 +16,8 @@ namespace F.T.Windsor.Tests
 
             container.AddFacility<FtwFacility>()
                 .Register(Component.For<ISelectHandlerFor<ISomeService>>().ImplementedBy<SomeServiceSelector>(),
-                          Component.For<ISomeService>().ImplementedBy<FirstImpl>(),
-                          Component.For<ISomeService>().ImplementedBy<SecondImpl>());
+                            Component.For<ISomeService>().ImplementedBy<FirstImpl>(),
+                            Component.For<ISomeService>().ImplementedBy<SecondImpl>());
 
             var someService = container.Resolve<ISomeService>();
             Assert.That(someService.GetType(), Is.EqualTo(typeof(SecondImpl)));

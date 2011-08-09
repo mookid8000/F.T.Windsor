@@ -3,7 +3,7 @@ What?
 
 `FtwFacility` is a facility for the excellent [Castle Windsor][3] that addresses one of its few shortcomings: The nifty `IHandlerSelector` and `IHandlersFilter` hooks are not registered in the container, they are instances provided to the container at registration time, and thus cannot take advantage of autowiring, lifestyle management, etc.
 
-Therefore, `FtwFacility` goes on and registers a `FtwHandlerSelector` that has access to the kernel, allowing it to pull handler selectors and handler filters from the container.
+Therefore, `FtwFacility` goes on and adds to the kernel one single implementation of `IHandlerSelector` and `IHandlersFilter` that has access to the kernel, allowing it to pull handler selectors and handler filters from the container.
 
 With `FtwFacility`, you can register `ISelectHandlerFor<TService>` and `IFilterHandlersFor<TService>` implementations and have them resolved and called whenever `TService` is either `Resolve`d or `ResolveAll`d.
 
