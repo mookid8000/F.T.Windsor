@@ -23,7 +23,7 @@ Reference F.T.Windsor from your project and
 
 before adding any selectors to the container.
 
-For example, you can do this:
+From then on, you can do this:
 
     container.Register(Component.For<ISelectHandlerFor<ISomeService>>().ImplementedBy<SomeServiceSelector>(),
                        Component.For<ISomeService>().ImplementedBy<FirstImpl>(),
