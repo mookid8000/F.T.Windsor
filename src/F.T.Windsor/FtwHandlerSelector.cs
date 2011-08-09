@@ -36,14 +36,20 @@ namespace F.T.Windsor
         {
             var selectors = (ISelectHandlerFor[])kernel.ResolveAll(typeof(ISelectHandlerFor<>).MakeGenericType(service));
 
-            return selectors.Select(selector => selector.Select(handlers)).FirstOrDefault(result => result != null);
+            using (new Disposer(kernel, selectors))
+            {
+                return selectors.Select(selector => selector.Select(handlers)).FirstOrDefault(result => result != null);
+            }
         }
 
         public IHandler[] SelectHandlers(Type service, IHandler[] handlers)
         {
             var selectors = (IFilterHandlersFor[])kernel.ResolveAll(typeof(IFilterHandlersFor<>).MakeGenericType(service));
 
-            return selectors.Select(selector => selector.Select(handlers)).FirstOrDefault(result => result != null);
+            using (new Disposer(kernel, selectors))
+            {
+                return selectors.Select(selector => selector.Select(handlers)).FirstOrDefault(result => result != null);
+            }
         }
 
         public void RegisterSelector(Type selectorType)
@@ -54,6 +60,26 @@ namespace F.T.Windsor
         public void RegisterFilter(Type filterType)
         {
             filterTypesToLookFor.Add(filterType);
+        }
+
+        class Disposer : IDisposable
+        {
+            readonly IKernel kernel;
+            readonly object[] objectsToRelease;
+
+            public Disposer(IKernel kernel, object[] objectsToRelease)
+            {
+                this.kernel = kernel;
+                this.objectsToRelease = objectsToRelease;
+            }
+
+            public void Dispose()
+            {
+                foreach(var obj in objectsToRelease)
+                {
+                    kernel.ReleaseComponent(obj);
+                }
+            }
         }
     }
 }

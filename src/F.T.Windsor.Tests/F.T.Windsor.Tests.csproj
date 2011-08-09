@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestFilterHandlersFor.cs" />
+    <Compile Include="TestProperDisposal.cs" />
     <Compile Include="TestSelectHandlerFor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
