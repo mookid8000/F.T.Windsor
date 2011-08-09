@@ -1,7 +1,7 @@
 What?
 ====
 
-`FtwFacility` is a facility for the excellent Castle Windsor that addresses one of its few shortcomings: The nifty `IHandlerSelector` and `IHandlersFilter` hooks are not registered in the container, they are instances provided to the container at registration time, and thus cannot take advantage of autowiring, lifestyle management, etc.
+`FtwFacility` is a facility for the excellent [Castle Windsor][3] that addresses one of its few shortcomings: The nifty `IHandlerSelector` and `IHandlersFilter` hooks are not registered in the container, they are instances provided to the container at registration time, and thus cannot take advantage of autowiring, lifestyle management, etc.
 
 Therefore, `FtwFacility` goes on and registers a `FtwHandlerSelector` that has access to the kernel, allowing it to pull handler selectors and handler filters from the container.
 
@@ -41,6 +41,11 @@ in order to choose among handlers for `FirstImpl` and `SecondImpl` when resolvin
 
 in order to pick & choose & order the list of handlers invoked when resolving multimple implementations of `ISomeService`.
 
+More info
+====
+
+Contact me [through Twitter][2].
+
 License
 ====
 
@@ -48,5 +53,4 @@ RespectOrderDirectivesHandlersFilter is [Beer-ware][1].
 
 [1]: http://en.wikipedia.org/wiki/Beerware
 [2]: http://twitter.com/#!/mookid8000
-[3]: http://mookid.dk/oncode/archives/category/castlewindsor
-[4]: http://mookid.dk/oncode/archives/2295
+[3]: http://docs.castleproject.org/Windsor.MainPage.ashx
