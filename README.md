@@ -49,7 +49,7 @@ Contact me [through Twitter][2].
 License
 ====
 
-RespectOrderDirectivesHandlersFilter is [Beer-ware][1].
+`FtwFacility` (or F.T.Windsor) is [Beer-ware][1].
 
 [1]: http://en.wikipedia.org/wiki/Beerware
 [2]: http://twitter.com/#!/mookid8000
