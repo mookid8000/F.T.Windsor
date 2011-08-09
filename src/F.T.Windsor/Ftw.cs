@@ -36,7 +36,7 @@ namespace F.T.Windsor
         {
             var selectors = (ISelectHandlerFor[])kernel.ResolveAll(typeof(ISelectHandlerFor<>).MakeGenericType(service));
 
-            using (new Disposer(kernel, selectors))
+            using (new Releaser(kernel, selectors))
             {
                 return selectors.Select(selector => selector.Select(handlers)).FirstOrDefault(result => result != null);
             }
@@ -46,7 +46,7 @@ namespace F.T.Windsor
         {
             var selectors = (IFilterHandlersFor[])kernel.ResolveAll(typeof(IFilterHandlersFor<>).MakeGenericType(service));
 
-            using (new Disposer(kernel, selectors))
+            using (new Releaser(kernel, selectors))
             {
                 return selectors.Select(selector => selector.Select(handlers)).FirstOrDefault(result => result != null);
             }
@@ -62,12 +62,12 @@ namespace F.T.Windsor
             filterTypesToLookFor.Add(filterType);
         }
 
-        class Disposer : IDisposable
+        class Releaser : IDisposable
         {
             readonly IKernel kernel;
             readonly object[] objectsToRelease;
 
-            public Disposer(IKernel kernel, object[] objectsToRelease)
+            public Releaser(IKernel kernel, object[] objectsToRelease)
             {
                 this.kernel = kernel;
                 this.objectsToRelease = objectsToRelease;
