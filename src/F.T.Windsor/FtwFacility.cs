@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Castle.Core;
 using Castle.MicroKernel;
 using Castle.MicroKernel.Facilities;
@@ -19,9 +18,7 @@ namespace F.T.Windsor
         void ComponentRegistered(IHandler handler, Ftw ftw)
         {
             var componentModel = handler.ComponentModel;
-
             RegisterSelectors(ftw, componentModel);
-
             RegisterFilters(ftw, componentModel);
         }
 
@@ -30,10 +27,6 @@ namespace F.T.Windsor
             var filters = componentModel.Services
                 .Where(s => s.IsGenericType && s.GetGenericTypeDefinition() == typeof(IFilterHandlersFor<>))
                 .ToList();
-
-            if (!filters.Any()) return;
-
-            Console.WriteLine("whee filters: {0}", string.Join(", ", filters));
 
             foreach (var filterType in filters)
             {
@@ -46,10 +39,6 @@ namespace F.T.Windsor
             var selectors = componentModel.Services
                 .Where(s => s.IsGenericType && s.GetGenericTypeDefinition() == typeof (ISelectHandlerFor<>))
                 .ToList();
-
-            if (!selectors.Any()) return;
-
-            Console.WriteLine("whee selectors: {0}", string.Join(", ", selectors));
 
             foreach (var selectorType in selectors)
             {

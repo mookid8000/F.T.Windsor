@@ -24,14 +24,6 @@ namespace F.T.Windsor
             return selectorTypesToLookFor.Contains(service);
         }
 
-        /// <summary>
-        /// Implemented for handlers filter
-        /// </summary>
-        public bool HasOpinionAbout(Type service)
-        {
-            return filterTypesToLookFor.Contains(service);
-        }
-
         public IHandler SelectHandler(string key, Type service, IHandler[] handlers)
         {
             var selectors = (ISelectHandlerFor[])kernel.ResolveAll(typeof(ISelectHandlerFor<>).MakeGenericType(service));
@@ -40,6 +32,14 @@ namespace F.T.Windsor
             {
                 return selectors.Select(selector => selector.Select(handlers)).FirstOrDefault(result => result != null);
             }
+        }
+
+        /// <summary>
+        /// Implemented for handlers filter
+        /// </summary>
+        public bool HasOpinionAbout(Type service)
+        {
+            return filterTypesToLookFor.Contains(service);
         }
 
         public IHandler[] SelectHandlers(Type service, IHandler[] handlers)

@@ -49,6 +49,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\Impl\FeedbackCollector.cs" />
+    <Compile Include="Services\IFeedback.cs" />
+    <Compile Include="Services\Impl\CurrentUserSettings.cs" />
+    <Compile Include="Services\ICurrentUserSettings.cs" />
+    <Compile Include="Services\Impl\DummySmsGateway.cs" />
+    <Compile Include="Services\Impl\EmailUserNotifier.cs" />
+    <Compile Include="Services\Impl\AbstractTask.cs" />
+    <Compile Include="Services\IProcessingTask.cs" />
+    <Compile Include="Services\ISmsGateway.cs" />
+    <Compile Include="Services\ITaskProcessor.cs" />
+    <Compile Include="Services\IUserNotifier.cs" />
+    <Compile Include="Services\Impl\SmsUserNotifier.cs" />
+    <Compile Include="Services\ProcessingTaskSorter.cs" />
+    <Compile Include="Services\TaskData.cs" />
+    <Compile Include="Services\UserNotifierSelector.cs" />
+    <Compile Include="TestComplexScenario01.cs" />
     <Compile Include="TestFilterHandlersFor.cs" />
     <Compile Include="TestProperDisposal.cs" />
     <Compile Include="TestSelectHandlerFor.cs" />
@@ -60,6 +76,7 @@
       <Name>F.T.Windsor</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
